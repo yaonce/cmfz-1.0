@@ -15,9 +15,10 @@ public class BannerServiceImpl implements BannerService {
     private BannerDAO bannerDAO;
 
     @Override
-    public List<Banner> queryAll() {
-
-        return bannerDAO.queryAll();
+    public List<Banner> queryAll(Integer page, Integer rows) {
+        int index = (page - 1) * rows;
+        List<Banner> banners = bannerDAO.queryAll(index, rows);
+        return banners;
     }
 
     @Override
@@ -33,5 +34,11 @@ public class BannerServiceImpl implements BannerService {
     @Override
     public void update(Banner banner) {
         bannerDAO.update(banner);
+    }
+
+    @Override
+    public Integer count() {
+
+        return bannerDAO.count();
     }
 }

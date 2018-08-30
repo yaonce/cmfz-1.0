@@ -42,7 +42,7 @@
             handler: function () {
                 var row = $('#dg').edatagrid('getSelected');
                 if (row == null) {
-
+                    alert("请选择一个");
                 } else {
                     var index = $("#dg").edatagrid("getRowIndex", row);
                     // 销毁指定的行
@@ -131,6 +131,9 @@
             pagination: true,
             toolbar: toolbar,
             view: detailview,
+            pagination: true,
+            pageSize: 3,
+            pageList: [3, 5, 7, 9],
             detailFormatter: function (rowIndex, rowData) {
                 return '<table><tr>' +
                     '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/img/1.gif" style="height:50px;"></td>' +
@@ -148,12 +151,10 @@
 
 <table id="dg"></table>
 <div id="dd">
-    <form action="${pageContext.request.contextPath}/banner/add" method="post" id="ff">
-        图片时间:<input type="text" name="title" class="easyui-textbox" data-options="width:200" value="2000-9-9"><br/>
-        图片路径:<input type="text" name="imgPath" class="easyui-textbox" data-options="width:200" value="sdfs"><br/>
+    <form action="${pageContext.request.contextPath}/banner/add" method="post" id="ff" enctype="multipart/form-data">
         图片描述:<input type="text" name="description" class="easyui-textbox" data-options="width:200" value="sdfsdf"><br/>
         图片状态:<input type="text" name="status" class="easyui-textbox" data-options="width:200" value="sdfsdf"><br/>
-        <%--图片时间:<input type="text" name="createDate" class="easyui-textbox" data-options="width:200" value="2000-9-9"><br/>--%>
+        图片上传:<input class="easyui-filebox" style="width:300px" name="img"><br/>
 
     </form>
 

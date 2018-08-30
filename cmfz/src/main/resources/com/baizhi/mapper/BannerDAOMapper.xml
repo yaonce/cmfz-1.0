@@ -3,7 +3,7 @@
 <mapper namespace="com.baizhi.dao.BannerDAO">
     <!--<cache></cache>-->
     <select id="queryAll" resultType="Banner">
-        SELECT * FROM banner;
+        SELECT * FROM banner LIMIT #{index},#{num};
     </select>
     <insert id="insert" parameterType="Banner">
        INSERT INTO banner (title, imgPath, description, status, createDate) VALUES ( #{title}, #{imgPath}, #{description}, #{status}, #{createDate})
@@ -14,4 +14,7 @@
     <update id="update" parameterType="Banner">
         UPDATE banner SET id=#{id}, title=#{title}, imgPath=#{imgPath}, description=#{description}, status=#{status} ,createDate=#{createDate} WHERE id=#{id}
     </update>
+    <select id="count" resultType="java.lang.Integer">
+        SELECT count(*) FROM banner
+    </select>
 </mapper>
