@@ -40,7 +40,7 @@
                     data: "username=" + username + "&password=" + password + "&myCode=" + myCode,
                     success: function (message) {
                         if (message == true)
-                            location.href = "${path}/main/main.jsp";
+                            location.href = "main/main-delete.jsp";
                     }
                 })
                 return false;

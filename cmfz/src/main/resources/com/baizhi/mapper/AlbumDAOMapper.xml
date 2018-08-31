@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.AlbumDAO">
+    <cache></cache>
+    <resultMap id="album" type="Album">
+        <id property="id" column="id"></id>
+        <result property="title" column="title"></result>
+        <result property="count" column="count"></result>
+        <result property="corverImg" column="corverImg"></result>
+        <result property="score" column="score"></result>
+        <result property="author" column="author"></result>
+        <result property="broadCast" column="broadCast"></result>
+        <result property="brife" column="brife"></result>
+        <result property="publicDate" column="publicDate"></result>
+        <result property="createDate" column="createDate"></result>
+        <result property="status" column="status"></result>
+
+        <collection property="children" ofType="Chapter">
+            <id property="id" column="cid"></id>
+            <result property="title" column="ctitle"></result>
+            <result property="duration" column="cduration"></result>
+            <result property="size" column="csize"></result>
+            <result property="audioPath" column="caudioPath"></result>
+        </collection>
+    </resultMap>
+
+    <select id="queryAll" resultMap="album">
+        select a.*,c.id cid,c.title ctitle,c.duration cduration ,
+        c.size csize , c.audioPath caudioPath from album a
+        join chapter c
+        on a.id=c.albumId
+    </select>
+    <select id="queryById" parameterType="java.lang.Integer" resultType="Album">
+        select *from album WHERE id = #{id}
+    </select>
+    <insert id="insert" parameterType="Album">
+        INSERT INTO album ( title, count, corverImg, score, author, broadCast, brife, publicDate, createDate, status) VALUES
+        ( #{title}, #{count}, #{corverImg},#{score}, #{author},#{broadCast}, #{brife},
+         #{publicDate}, #{createDate}, #{status})
+    </insert>
+
+</mapper>

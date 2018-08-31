@@ -16,17 +16,19 @@
     <script type="text/javascript" src="../js/jquery.edatagrid.js"></script>
 
     <script type="text/javascript">
+        var $tabs;
         $(function () {
+            $tabs = $('#tt');
             $.ajax({
                 url: "${pageContext.request.contextPath}/menu/queryAll",
-                type: "get",
                 dataType: "json",
                 success: function (data) {
                     $.each(data, function (index, first) {
                         var c = "";
-
-                        $.each(first.child, function (index1, second) {
-                            c += "<p><a onclick=\"addTabs('" + second.iconCls + "','" + second.title + "','" + second.href + "')\" id=\"btn\" href=\"#\" class=\"easyui-linkbutton\" data-options=\"iconCls:'" + second.iconCls + "'\">" + second.title + "</a></p>";
+                        $.each(first.child, function (index1, child) {
+                            c += "<a class='easyui-linkbutton' onclick='addTabs(" + JSON.stringify(child) + ");' " +
+                                "data-options=\"iconCls:'" + child.iconCls + "',plain:true\" " +
+                                "style='border: 1px #369eff solid;width: 93%;margin: 5px 5px'>" + child.title + "</a></<br>";
                         });
 
                         $('#aa').accordion('add', {
@@ -40,29 +42,24 @@
             })
         });
 
-        function addTabs(iconCls, title, href) {
-
-            var flag = $("#tt").tabs("exists", title);
-            if (flag) {
-                $("#tt").tabs("select", title)
-            } else {
-                $('#tt').tabs('add', {
-                    title: title,
+        function addTabs(obj) {
+            var ex = $tabs.tabs('exists', obj.title);
+            if (!ex) {
+                $tabs.tabs('add', {
+                    title: obj.title,
+                    iconCls: obj.iconCls,
                     closable: true,
-                    href: "${pageContext.request.contextPath}" + href
-
-                });
+                    href: '${pageContext.request.contextPath}' + obj.href
+                })
+            } else {
+                $tabs.tabs('select', obj.title);
             }
         }
+
     </script>
 
 </head>
 <body class="easyui-layout">
-
-<%----%>
-<a href="" onclick="addTabs(second.iconCls,second.title,second.href)"></a>
-<%----%>
-
 
 <div data-options="region:'north',split:true" style="height:60px;background-color:  #5C160C">
     <div style="font-size: 24px;color: #FAF7F7;font-family: 楷体;font-weight: 900;width: 500px;float:left;padding-left: 20px;padding-top: 10px">

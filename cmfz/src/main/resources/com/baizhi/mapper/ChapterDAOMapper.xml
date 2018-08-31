@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.baizhi.dao.ChapterDAO">
+    <cache></cache>
+    <insert id="insert" parameterType="Chapter">
+        INSERT INTO cmfz.chapter (id, title, duration, size, audioPath, albumId) VALUES
+        (#{id}, #{title}, #{duration}, #{size}, #{audioPath}, #{albumId})
+    </insert>
+
+</mapper>

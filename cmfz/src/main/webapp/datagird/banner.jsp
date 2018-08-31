@@ -136,7 +136,7 @@
             pageList: [3, 5, 7, 9],
             detailFormatter: function (rowIndex, rowData) {
                 return '<table><tr>' +
-                    '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}/img/1.gif" style="height:50px;"></td>' +
+                    '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}' + rowData.imgPath + '" style="height:50px;"></td>' +
                     '<td style="border:0">' +
                     '<p>Attribute: ' + rowData.createDate + '</p>' +
                     '<p>Status: ' + rowData.status + '</p>' +
@@ -150,13 +150,14 @@
 </script>
 
 <table id="dg"></table>
-<div id="dd">
-    <form action="${pageContext.request.contextPath}/banner/add" method="post" id="ff" enctype="multipart/form-data">
-        图片描述:<input type="text" name="description" class="easyui-textbox" data-options="width:200" value="sdfsdf"><br/>
-        图片状态:<input type="text" name="status" class="easyui-textbox" data-options="width:200" value="sdfsdf"><br/>
-        图片上传:<input class="easyui-filebox" style="width:300px" name="img"><br/>
-
-    </form>
-
-
+<div style="display: none">
+    <div id="dd">
+        <form action="${pageContext.request.contextPath}/banner/add" method="post" id="ff"
+              enctype="multipart/form-data">
+            图片标题:<input type="text" name="title" class="easyui-textbox" data-options="width:200" value="标题"><br/>
+            图片描述:<input type="text" name="description" class="easyui-textbox" data-options="width:200" value="描述"><br/>
+            图片状态:<input type="text" name="status" class="easyui-textbox" data-options="width:200" value="Y"><br/>
+            图片上传:<input class="easyui-filebox" style="width:300px" name="img"><br/>
+        </form>
+    </div>
 </div>
