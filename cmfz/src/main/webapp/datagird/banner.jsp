@@ -132,8 +132,8 @@
             toolbar: toolbar,
             view: detailview,
             pagination: true,
-            pageSize: 3,
-            pageList: [3, 5, 7, 9],
+            pageSize: 30,
+            pageList: [30, 5, 7, 9],
             detailFormatter: function (rowIndex, rowData) {
                 return '<table><tr>' +
                     '<td rowspan=2 style="border:0"><img src="${pageContext.request.contextPath}' + rowData.imgPath + '" style="height:50px;"></td>' +

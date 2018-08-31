@@ -16,6 +16,9 @@ spring:
     encoding:
       charset: UTF-8
       force: true
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/cmfz

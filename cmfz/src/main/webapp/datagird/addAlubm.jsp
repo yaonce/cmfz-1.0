@@ -11,6 +11,7 @@
         },
         success: function (data) {
 
+            $('#tree').treegrid('load');
         }
     });
 </script>

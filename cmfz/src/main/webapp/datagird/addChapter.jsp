@@ -3,16 +3,6 @@
 
 <script type="text/javascript">
     var $add = $('#addChapter');
-    $.ajax({
-        url: "${pageContext.request.contextPath}/album/show",
-        type: "post",
-        dataType: "json",
-        success: function (data) {
-            $.each(data, function (index, first) {
-                $add.form
-            })
-        }
-    })
 
     $add.form({
         url: '${pageContext.request.contextPath}/chapter/add',
@@ -20,6 +10,10 @@
             var v = $add.form('validate');
             return v;
         },
+        success: function (data) {
+
+            $('#tree').treegrid('load');
+        }
     });
 </script>
 <form id="addChapter" method="post" enctype="multipart/form-data">
@@ -28,21 +22,13 @@
         <input class="easyui-textbox" type="text" name="title" value="名字"/>
     </div>
     <div>
-        <label>大小:</label>
-        <input class="easyui-textbox" type="text" name="size" value="大小"/>
-    </div>
-    <div>
         <label>音频:</label>
-        <input class="easyui-textbox" type="text" name="audioPath" value="音频"/>
+        <input class="easyui-filebox" name="audio" style="width:300px">
     </div>
-    <div>
-        <label>时长:</label>
-        <input class="easyui-textbox" type="text" name="duration" value="10:00"/>
-    </div>
-    <div>
-        <label>专辑名:</label>
-        <input class="easyui-textbox" type="text" name="albumId" value="1"/>
-    </div>
+    <input class="easyui-combobox" name="albumId" data-options="
+        valueField: 'id',
+        textField: 'title',
+        url: '${pageContext.request.contextPath}/album/show',"/>
 
 </form>
 

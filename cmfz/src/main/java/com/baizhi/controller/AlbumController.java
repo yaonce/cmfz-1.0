@@ -64,7 +64,7 @@ public class AlbumController {
             e.printStackTrace();
         }
         //入库
-        album.setCorverImg("/" + upload + "/" + newName);
+        album.setCorverImg(newName);
         album.setCreateDate(new Date());
         albumService.insert(album);
     }

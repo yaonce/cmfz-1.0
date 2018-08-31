@@ -27,7 +27,7 @@
                         title: '专辑详情',
                         width: 400,
                         height: 200,
-                        href: '${pageContext.request.contextPath}/datagird/details.jsp?id=' + treegrid.id,
+                        href: '${pageContext.request.contextPath}/datagird/details.jsp?id=' + treegrid.id + '&corverImg=' + treegrid.corverImg,
                     });
                 } else {
                     $.messager.alert('警告', '请选择专辑');
@@ -46,14 +46,15 @@
                         handler: function () {
                             $('#addAlubm').submit();
                             $('#details').dialog('close')
+
                         }
                     }, {
                         text: '关闭',
                         handler: function () {
-                            $('#details').dialog('close')
+                            $('#details').dialog('close');
+
                         }
                     }],
-
                     href: "${pageContext.request.contextPath}/datagird/addAlubm.jsp",
                 })
             }
@@ -84,9 +85,19 @@
             text: '下载音频',
             iconCls: 'icon-help',
             handler: function () {
-                alert('编辑按钮')
+                var treegrid = $("#tree").treegrid("getSelected");
+                if (typeof treegrid.id != 'number') {
+                    location.href = "${pageContext.request.contextPath}/chapter/down?title="
+                        + treegrid.title + "&audioPath=" + treegrid.audioPath;
+                } else {
+                    $.messager.alert('警告', '请选择专辑');
+                }
             }
-        }]
+        }],
+        onDblClickRow: function (row) {
+            $("#audio_dialog").dialog("open");
+            $("#audioPlay").prop("src", "${pageContext.request.contextPath}" + row.audioPath);
+        }
 
 
     });
@@ -95,4 +106,7 @@
 </script>
 <table id="tree"></table>
 <div id="details">Dialog Content.</div>
-
+<div id="audio_dialog" class="easyui-dialog" title="My Dialog" style="width:400px;height:200px;"
+     data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    <audio src="" controls="controls" autoplay="autoplay" id="audioPlay"></audio>
+</div>

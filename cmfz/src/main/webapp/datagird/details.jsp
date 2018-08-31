@@ -14,10 +14,6 @@
         <input class="easyui-textbox" type="text" name="count" readonly/>
     </div>
     <div>
-        <label>封面:</label>
-        <input class="easyui-textbox" type="text" name="corverImg" readonly/>
-    </div>
-    <div>
         <label>评分:</label>
         <input class="easyui-textbox" type="text" name="score" readonly/>
     </div>
@@ -44,6 +40,10 @@
     <div>
         <label>状态:</label>
         <input class="easyui-textbox" type="text" name="status" readonly/>
+    </div>
+    <div>
+        <label>封面:</label>
+        <img src="${pageContext.request.contextPath}/upload/${param.corverImg}">
     </div>
 </form>
 
