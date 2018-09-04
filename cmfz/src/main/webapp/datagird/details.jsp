@@ -43,7 +43,7 @@
     </div>
     <div>
         <label>封面:</label>
-        <img src="${pageContext.request.contextPath}/upload/${param.corverImg}">
+        <img src="${pageContext.request.contextPath}/upload/${param.corverImg}" height="100" width="100">
     </div>
 </form>
 
